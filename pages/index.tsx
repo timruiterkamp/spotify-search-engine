@@ -2,7 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-import SearchBar from "../components/molecules/SearchBar/SearchBar";
+import SearchBar from "../components/molecules/searchBar/SearchBar";
+import Search from "../components/organisms/search/search";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1>test</h1>
-        <SearchBar />
+        <Search />
       </main>
     </div>
   );

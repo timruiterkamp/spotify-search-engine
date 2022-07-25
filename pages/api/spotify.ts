@@ -28,12 +28,37 @@ const getSpotifyAccessToken = async () => {
   return response.json();
 };
 
-const SearchSpotifySong = async () => {
-  const { access_token } = await getSpotifyAccessToken;
+const searchSpotifySong = async (search: string) => {
+  const { access_token } = await getSpotifyAccessToken();
+  const searchObject = {
+    q: search,
+    type: "track",
+    market: "ES",
+    limit: 10,
+    offset: 5,
+  };
+
+  console.log(access_token);
+
+  const url = `${ENDPOINTS.search}?q=${search}&type=track&market=ES&limit=10&offset=5`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  // console.log(response);
 };
 
 export default function handler(req: any, res: any) {
+  const { method, body } = req;
+  if (method === "POST") {
+    if (JSON.parse(body)?.search) {
+      searchSpotifySong(JSON.parse(body)?.search);
+    }
+  }
   const name = "john doe";
-
   res.status(200).json({ name });
 }

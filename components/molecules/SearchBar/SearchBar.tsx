@@ -1,20 +1,12 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import { SearchBarInput } from "../../atoms/inputs/searchInput";
 
-type Props = {};
+type SearchBarProps = {
+  handleSearch: (value: string) => void;
+};
 
-export const SearchBarInput = styled.input`
-  width: 100%;
-  height: 50px;
-  border-radius: 50px;
-  color: #3a3a3a;
-  border: 1px solid #eaeaea;
-  min-width: 25vw;
-  padding: 10px 20px;
-  animation: ease-in-out 0.3s infinite;
-`;
-
-const SearchBar = (props: Props) => {
+const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
+  const [searchQuery, setSearchQuery] = React.useState<string | null>(null);
   // Searchbar with autocomplete
   // gather search results through server side props
   // Suggestions on categories
@@ -24,6 +16,12 @@ const SearchBar = (props: Props) => {
     const data = await (await response).json();
     console.log(data);
   };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
+    setSearchQuery(e.currentTarget.value);
+  };
+
   useEffect(() => {
     handleGetReq();
   }, []);
@@ -32,8 +30,11 @@ const SearchBar = (props: Props) => {
     <div>
       <SearchBarInput
         placeholder="Search spotify song"
-        onChange={(e) => console.log(e.currentTarget.value)}
+        onChange={handleSearchChange}
       />
+      <button onClick={() => searchQuery && handleSearch(searchQuery)}>
+        Search{" "}
+      </button>
     </div>
   );
 };
