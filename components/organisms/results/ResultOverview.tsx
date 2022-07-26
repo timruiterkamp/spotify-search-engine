@@ -8,12 +8,12 @@ type ResultOverviewProps = {
   data?: any;
 };
 
-export const StyledOverview = styled.section`
+const StyledOverview = styled.section`
   max-width: 80vw;
   margin: 0 auto;
 `;
 
-export const StyledGrid = styled.div`
+const StyledGrid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: auto auto auto auto;

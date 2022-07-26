@@ -1,12 +1,26 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
+import styled from "styled-components";
 import Homepage from "../components/pages/Homepage";
-import styles from "../styles/Home.module.css";
+
+const StyledContainer = styled.div`
+  padding: 0 2rem;
+`;
+
+const StyledMain = styled.main`
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <StyledContainer>
       <Head>
         <title>Spotify Search engine</title>
         <meta name="description" content="Spotify search engine assesment" />
@@ -17,10 +31,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <StyledMain>
         <Homepage />
-      </main>
-    </div>
+      </StyledMain>
+    </StyledContainer>
   );
 };
 

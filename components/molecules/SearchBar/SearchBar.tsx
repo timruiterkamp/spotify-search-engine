@@ -11,7 +11,7 @@ type SearchBarProps = {
   handleSearch: (value: string) => void;
 };
 
-export const StyledSearchBar = styled.div`
+const StyledSearchBar = styled.div`
   position: relative;
 
   .speech-button {
