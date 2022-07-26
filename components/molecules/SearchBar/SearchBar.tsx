@@ -79,4 +79,4 @@ const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
   );
 };
 
-export default SearchBar;
+export { SearchBar };
