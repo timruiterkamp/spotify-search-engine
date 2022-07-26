@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import client from "../../graphql/apollo-client";
-import { useSearchContext } from "../../context/SearchContext";
-import SearchBar from "../../molecules/searchBar/SearchBar";
+import React from "react";
+import { useSearchContext } from "@/components/context/SearchContext";
+import SearchBar from "@/components/molecules/searchBar/SearchBar";
 
 const Search: React.FC = () => {
   const { searchSpotify } = useSearchContext();

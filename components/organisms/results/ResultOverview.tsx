@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { BallTriangle } from "react-loader-spinner";
 import styled from "styled-components";
-import { useSearchContext } from "../../context/SearchContext";
-import Card from "../../molecules/card/Card";
+import { useSearchContext } from "@/components/context/SearchContext";
+import Card from "@/components/molecules/card/Card";
 
 type ResultOverviewProps = {
   data?: any;

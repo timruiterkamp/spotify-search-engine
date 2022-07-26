@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { SEARCHQUERY } from "../graphql/queries/SpotifyQueries";
+import { SEARCHQUERY } from "@/components/graphql/queries/SpotifyQueries";
 
 interface SearchContextProps {
   spotifyResults: any;

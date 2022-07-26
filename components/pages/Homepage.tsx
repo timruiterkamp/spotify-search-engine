@@ -1,9 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { GetServerSideProps } from "next";
 import React from "react";
-import client from "../graphql/apollo-client";
-import ResultOverview from "../organisms/results/ResultOverview";
-import Search from "../../components/organisms/search/Search";
+import client from "@/components/graphql/apollo-client";
+import ResultOverview from "@/components/organisms/results/ResultOverview";
+import Search from "@/components/organisms/search/Search";
 
 const Homepage: React.FC = () => {
   return (
