@@ -4,10 +4,6 @@ import styled from "styled-components";
 import { useSearchContext } from "@/components/context/SearchContext";
 import Card from "@/components/molecules/card/Card";
 
-type ResultOverviewProps = {
-  data?: any;
-};
-
 const StyledOverview = styled.section`
   max-width: 80vw;
   margin: 0 auto;
@@ -29,7 +25,7 @@ const StyledGrid = styled.div`
   }
 `;
 
-const ResultOverview: React.FC<ResultOverviewProps> = ({ data }) => {
+const ResultOverview: React.FC = () => {
   const { spotifyResults, searchLoading } = useSearchContext();
 
   if (searchLoading) {
@@ -47,16 +43,22 @@ const ResultOverview: React.FC<ResultOverviewProps> = ({ data }) => {
     data: spotifyResults?.[category]?.items,
   }));
 
-  return structuredData?.map((item: any) => (
+  if (!structuredData?.length) {
+    return <div></div>;
+  }
+
+  const overview = structuredData.map((item: any) => (
     <StyledOverview key={item?.title}>
-      <h3>{item.title.toUpperCase()}</h3>
+      <h2>{item.title.toUpperCase()}</h2>
       <StyledGrid>
         {item?.data?.map((results: any, index: number) => (
-          <Card key={results?.name ?? index} data={results} />
+          <Card key={results?.name + index} data={results} />
         ))}
       </StyledGrid>
     </StyledOverview>
   ));
+
+  return <>{overview}</>;
 };
 
 export default ResultOverview;

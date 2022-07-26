@@ -22,16 +22,17 @@ const SearchBarInput: React.FC<SearchInputProps> = ({
   placeholder,
   value,
 }) => {
-  const [localValue, setLocalValue] = useState(value);
+  const [localValue, setLocalValue] = useState<string>("");
 
   useEffect(() => {
     if (value) {
       setLocalValue(value);
     }
     return () => {
-      setLocalValue(undefined);
+      setLocalValue("");
     };
   }, [value]);
+
   return (
     <StyledSearchBar
       type="search"

@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-type CardProps = {
-  data?: any;
-};
+interface CardProps {
+  data?: {
+    __typename: string;
+    preview_url?: string;
+    name: string;
+    album?: {
+      images?: {
+        url?: string;
+      }[];
+    };
+    genres?: string[];
+    artists?: {
+      name?: string;
+    }[];
+    duration_ms?: number;
+    images?: {
+      url?: string;
+    }[];
+  };
+}
 
 interface StyledCardProps {
   backgroundImage?: string;
@@ -72,7 +88,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
   };
 
   const cardContent = () => {
-    if (data.__typename === "Track") {
+    if (data?.__typename === "Track") {
       return (
         <StyledCard
           backgroundImage={data?.album?.images?.[0]?.url}
@@ -86,7 +102,9 @@ const Card: React.FC<CardProps> = ({ data }) => {
           </header>
           <StyledCardMeta>
             <h4>{data?.artists?.[0]?.name} -</h4>
-            <h5>duration: {transformMilliseconds(data?.duration_ms)}</h5>
+            {data?.duration_ms ? (
+              <h5>duration: {transformMilliseconds(data?.duration_ms)}</h5>
+            ) : null}
           </StyledCardMeta>
         </StyledCard>
       );

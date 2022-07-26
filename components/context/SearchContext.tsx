@@ -8,8 +8,38 @@ import React, {
 } from "react";
 import { SEARCHQUERY } from "@/components/graphql/queries/SpotifyQueries";
 
+interface IArtists {
+  items: {
+    name: string;
+    images?: {
+      url?: string;
+    }[];
+    top_tracks?: {
+      name: string;
+    };
+    genres?: string[];
+  }[];
+}
+
+interface ITracks {
+  items: {
+    name: string;
+    preview_url?: string;
+    duration_ms?: number;
+    artists?: {
+      name?: string;
+    }[];
+    album?: {
+      images?: {
+        url?: string;
+      }[];
+    };
+  }[];
+}
 interface SearchContextProps {
-  spotifyResults: any;
+  spotifyResults: {
+    [key: string]: IArtists | ITracks;
+  } | null;
   searchSpotify: (value: string) => void;
   searchLoading: boolean;
   searchError: ApolloError | undefined;
@@ -20,7 +50,7 @@ interface SearchContextProviderProps {
 }
 
 const SearchContextDefaults: SearchContextProps = {
-  spotifyResults: [],
+  spotifyResults: null,
   searchSpotify: (value: string) => null,
   searchLoading: false,
   searchError: undefined,
