@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React from "react";
 import styled from "styled-components";
-import Homepage from "../components/pages/Homepage";
+import Homepage from "@/lib/components/pages/Homepage";
 
 const StyledContainer = styled.div`
   padding: 0 2rem;

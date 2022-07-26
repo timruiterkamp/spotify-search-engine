@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { BallTriangle } from "react-loader-spinner";
 import styled from "styled-components";
-import { useSearchContext } from "@/components/context/SearchContext";
-import Card from "@/components/molecules/card/Card";
+import { useSearchContext } from "@/lib/context/SearchContext";
+import Card from "@/lib/components/molecules/card/Card";
 
 const StyledOverview = styled.section`
   max-width: 80vw;

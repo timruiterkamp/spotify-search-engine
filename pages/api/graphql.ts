@@ -9,6 +9,7 @@ const apolloServer = new ApolloServer({
   resolvers,
   csrfPrevention: true,
   cache: "bounded",
+  introspection: process.env.NODE_ENV !== "production",
 });
 
 const startServer = apolloServer.start();

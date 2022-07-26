@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { SEARCHQUERY } from "@/components/graphql/queries/SpotifyQueries";
+import { SEARCHQUERY } from "@/lib/graphql/queries/SpotifyQueries";
 
 interface IArtists {
   items: {

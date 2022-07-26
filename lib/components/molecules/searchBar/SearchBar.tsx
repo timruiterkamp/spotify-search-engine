@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import SearchButton from "@/components/atoms/buttons/SearchButton";
-import SpeechButton from "@/components/atoms/buttons/SpeechButton";
-import SearchBarInput from "@/components/atoms/inputs/SearchBarInput";
+import SearchButton from "@/lib/components/atoms/buttons/SearchButton";
+import SpeechButton from "@/lib/components/atoms/buttons/SpeechButton";
+import SearchBarInput from "@/lib/components/atoms/inputs/SearchBarInput";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";

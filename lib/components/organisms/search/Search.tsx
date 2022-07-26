@@ -1,6 +1,6 @@
 import React from "react";
-import { useSearchContext } from "@/components/context/SearchContext";
-import SearchBar from "@/components/molecules/searchBar/SearchBar";
+import { useSearchContext } from "@/lib/context/SearchContext";
+import SearchBar from "@/lib/components/molecules/searchBar/SearchBar";
 
 const Search: React.FC = () => {
   const { searchSpotify } = useSearchContext();
