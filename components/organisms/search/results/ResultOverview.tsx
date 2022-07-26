@@ -48,11 +48,11 @@ const ResultOverview: React.FC<ResultOverviewProps> = ({ data }) => {
   }));
 
   return structuredData?.map((item: any) => (
-    <StyledOverview key={item.title}>
+    <StyledOverview key={item?.title}>
       <h3>{item.title.toUpperCase()}</h3>
       <StyledGrid>
-        {item?.data?.map((results: any) => (
-          <Card data={results} />
+        {item?.data?.map((results: any, index: number) => (
+          <Card key={results?.name ?? index} data={results} />
         ))}
       </StyledGrid>
     </StyledOverview>
