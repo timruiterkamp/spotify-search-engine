@@ -1,6 +1,4 @@
-import { gql, ApolloServer } from "apollo-server-micro";
-import { MicroRequest } from "apollo-server-micro/dist/types";
-import { ServerResponse } from "http";
+import { ApolloServer } from "apollo-server-micro";
 import { typeDefs } from "./schema/index";
 import { resolvers } from "./resolvers/resolver";
 import Cors from "micro-cors";
