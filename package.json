@@ -16,6 +16,7 @@
     "apollo-server-micro": "^3.10.0",
     "babel-plugin-styled-components": "^2.0.7",
     "dotenv": "^16.0.1",
+    "global": "^4.4.0",
     "graphql": "^16.5.0",
     "micro": "^9.4.0",
     "micro-cors": "^0.1.1",
@@ -26,7 +27,8 @@
     "react-loader-spinner": "^5.1.7-beta.1",
     "react-speech-recognition": "^3.9.1",
     "styled-components": "^5.3.5",
-    "typescript-plugin-styled-components": "^2.0.0"
+    "typescript-plugin-styled-components": "^2.0.0",
+    "vercel": "^27.2.0"
   },
   "devDependencies": {
     "@types/node": "18.0.4",
