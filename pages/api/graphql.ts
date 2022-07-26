@@ -1,7 +1,8 @@
 import { gql, ApolloServer } from "apollo-server-micro";
 import { MicroRequest } from "apollo-server-micro/dist/types";
 import { ServerResponse } from "http";
-import { typeDefs, resolvers } from "./schema/index";
+import { typeDefs } from "./schema/index";
+import { resolvers } from "./resolvers/resolver";
 import Cors from "micro-cors";
 
 const cors = Cors();
@@ -9,6 +10,7 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   csrfPrevention: true,
+  cache: "bounded",
 });
 
 const startServer = apolloServer.start();

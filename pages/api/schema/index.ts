@@ -2,6 +2,13 @@ import { gql } from "apollo-server-micro";
 import { getSpotifyAccessToken } from "../helpers/getSpotifyAccesstoken";
 import { ENDPOINTS } from "../helpers/spotifyEndpoints";
 
+const Pagination = `
+    limit: Int
+    next: String
+    offset: Int
+    previous: String
+    total: Int
+  `;
 //typeDefs from https://github.com/charlypoly/spotify-graphql/blob/master/lib/schema.ts
 export const typeDefs = gql`
   type Track {
@@ -174,24 +181,18 @@ export const typeDefs = gql`
     context: PlayerContext
   }
 
+ 
+
   type SearchArtist {
     href: String
     items: [Artist]
-    limit: Int
-    next: String
-    offset: Int
-    previous: String
-    total: Int
+    ${Pagination}
   }
 
   type SearchTrack {
     href: String
     items: [Track]
-    limit: Int
-    next: String
-    offset: Int
-    previous: String
-    total: Int
+    ${Pagination}
   }
 
   type Search {
@@ -199,40 +200,15 @@ export const typeDefs = gql`
     tracks: SearchTrack
   }
 
+  type NewReleases {
+    href: String
+    items: [Album]
+    ${Pagination}
+  }
+
   # the schema allows the following query:
   type Query {
-    me: PrivateUser
-    user(id: String!): PublicUser
-    track(id: String, name: String): Track
-    tracks(ids: String!): [Track]
-    audio_features(trackIds: String!): [AudioFeatures]
-    audio_feature(trackId: String!): AudioFeatures
-    artist(id: String, name: String): Artist
-    artists(ids: String!): [Artist]
-    album(id: String!): Album
-    albums(ids: String!): [Album]
-    playlist(id: String!, userId: String!): Playlist
-    search(search: String!): Search
+    search(q: String!): Search
+    newReleases: NewReleases
   }
 `;
-
-export const resolvers = {
-  Query: {
-    search: async (search: string) => {
-      const { access_token } = await getSpotifyAccessToken();
-
-      const url = `${ENDPOINTS.search}?q=${search}&type=track%2Cartist&market=ES&limit=10&offset=5`;
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      return data;
-    },
-  },
-};

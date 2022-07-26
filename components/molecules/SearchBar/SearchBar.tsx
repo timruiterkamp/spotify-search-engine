@@ -1,41 +1,81 @@
 import React, { useEffect } from "react";
-import { SearchBarInput } from "../../atoms/inputs/searchInput";
+import styled from "styled-components";
+import SearchButton from "../../atoms/buttons/SearchButton";
+import SpeechButton from "../../atoms/buttons/SpeechButton";
+import SearchBarInput from "../../atoms/inputs/SearchBarInput";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 type SearchBarProps = {
   handleSearch: (value: string) => void;
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
-  const [searchQuery, setSearchQuery] = React.useState<string | null>(null);
-  // Searchbar with autocomplete
-  // gather search results through server side props
-  // Suggestions on categories
+export const StyledSearchBar = styled.div`
+  position: relative;
 
-  const handleGetReq = async () => {
-    const response = fetch("/api/spotify");
-    const data = await (await response).json();
-    console.log(data);
-  };
+  .speech-button {
+    position: absolute;
+    right: 50px;
+  }
+  .search-button {
+    position: absolute;
+    right: 0;
+  }
+`;
+
+const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
+  const [searchQuery, setSearchQuery] = React.useState<string | undefined>(
+    undefined
+  );
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+    isMicrophoneAvailable,
+  } = useSpeechRecognition();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     setSearchQuery(e.currentTarget.value);
   };
 
+  const handleSpeech = () => {
+    if (
+      !listening &&
+      isMicrophoneAvailable &&
+      browserSupportsSpeechRecognition
+    ) {
+      resetTranscript();
+      SpeechRecognition.startListening();
+    } else {
+      SpeechRecognition.stopListening();
+    }
+  };
+
   useEffect(() => {
-    handleGetReq();
-  }, []);
+    if (transcript) {
+      setSearchQuery(transcript);
+    }
+  }, [transcript]);
 
   return (
-    <div>
+    <StyledSearchBar>
       <SearchBarInput
+        value={searchQuery}
         placeholder="Search spotify song"
         onChange={handleSearchChange}
       />
-      <button onClick={() => searchQuery && handleSearch(searchQuery)}>
-        Search{" "}
-      </button>
-    </div>
+      <SpeechButton
+        className="speech-button"
+        listening={listening}
+        handleClick={handleSpeech}
+      />
+      <SearchButton
+        className="search-button"
+        handleClick={() => searchQuery && handleSearch(searchQuery)}
+      />
+    </StyledSearchBar>
   );
 };
 

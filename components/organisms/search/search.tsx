@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../../molecules/searchBar/SearchBar";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
+import client from "../../graphql/apollo-client";
+import { useSearchContext } from "../../context/SearchContext";
 
-type Props = {};
+const Search: React.FC = () => {
+  const { searchSpotify } = useSearchContext();
 
-const Search = (props: Props) => {
-  const handleSearch = (value: string) => {
-    console.log("is searching");
-    const searchData = {
-      search: value,
-    };
-
-    const result = fetch("/api/spotify", {
-      method: "POST",
-      body: JSON.stringify(searchData),
-    });
-
-    console.log(result);
+  const handleSearch = async (value: string) => {
+    return searchSpotify(value);
   };
+
   return <SearchBar handleSearch={handleSearch} />;
 };
 
